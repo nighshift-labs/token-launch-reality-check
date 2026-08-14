@@ -489,5 +489,93 @@ class TokenRealityCheckTests(unittest.TestCase):
         self.assertEqual(report["review_status"], "manual_review_required")
 
 
+    def test_flags_high_bounded_flow_concentration(self):
+        def opener(request, timeout):
+            payload = json.loads(request.data)
+            method = payload["method"]
+            params = payload["params"]
+            if method == "eth_chainId":
+                result = "0x2105"
+            elif method == "eth_getCode":
+                result = "0x60016000"
+            elif method == "eth_getStorageAt":
+                result = "0x" + "00" * 32
+            elif method == "eth_call":
+                selector = params[0]["data"][:10]
+                results = {
+                    token_reality_check.SELECTORS["name"]: dynamic_string("Concentrated"),
+                    token_reality_check.SELECTORS["symbol"]: dynamic_string("CC"),
+                    token_reality_check.SELECTORS["decimals"]: "0x" + word(18),
+                    token_reality_check.SELECTORS["total_supply"]: "0x" + word(1000),
+                    token_reality_check.SELECTORS["owner"]: "0x" + word(0),
+                    token_reality_check.SELECTORS["minter"]: "0x" + word(0),
+                    token_reality_check.SELECTORS["paused"]: "0x" + word(0),
+                }
+                result = results.get(selector, "0x")
+            elif method == "eth_getLogs":
+                result = [transfer_log("0x" + "00" * 20, OWNER, 100, 256 + i) for i in range(5)]
+            else:
+                raise AssertionError(f"unexpected RPC method: {method}")
+            return FakeResponse({"jsonrpc": "2.0", "id": 1, "result": result})
+
+        report = token_reality_check.build_report(
+            {
+                "rpc_url": "https://rpc.example",
+                "token_address": TOKEN,
+                "holder_scan": {"from_block": 256, "to_block": 260, "chunk_size": 100},
+            },
+            opener=opener,
+            captured_at="2026-08-08T00:00:00Z",
+        )
+
+        self.assertEqual(report["review_status"], "manual_review_required")
+        self.assertTrue(any("concentrated in a single address" in flag for flag in report["review_flags"]))
+
+    def test_does_not_flag_low_bounded_flow_concentration(self):
+        def opener(request, timeout):
+            payload = json.loads(request.data)
+            method = payload["method"]
+            params = payload["params"]
+            if method == "eth_chainId":
+                result = "0x2105"
+            elif method == "eth_getCode":
+                result = "0x60016000"
+            elif method == "eth_getStorageAt":
+                result = "0x" + "00" * 32
+            elif method == "eth_call":
+                selector = params[0]["data"][:10]
+                results = {
+                    token_reality_check.SELECTORS["name"]: dynamic_string("Example"),
+                    token_reality_check.SELECTORS["symbol"]: dynamic_string("EX"),
+                    token_reality_check.SELECTORS["decimals"]: "0x" + word(18),
+                    token_reality_check.SELECTORS["total_supply"]: "0x" + word(1000),
+                    token_reality_check.SELECTORS["owner"]: "0x" + word(0),
+                    token_reality_check.SELECTORS["minter"]: "0x" + word(0),
+                    token_reality_check.SELECTORS["paused"]: "0x" + word(0),
+                }
+                result = results.get(selector, "0x")
+            elif method == "eth_getLogs":
+                result = [
+                    transfer_log("0x" + "00" * 20, OWNER, 400, 256),
+                    transfer_log(OWNER, QUOTE, 100, 257),
+                ]
+            else:
+                raise AssertionError(f"unexpected RPC method: {method}")
+            return FakeResponse({"jsonrpc": "2.0", "id": 1, "result": result})
+
+        report = token_reality_check.build_report(
+            {
+                "rpc_url": "https://rpc.example",
+                "token_address": TOKEN,
+                "holder_scan": {"from_block": 256, "to_block": 257, "chunk_size": 100},
+            },
+            opener=opener,
+            captured_at="2026-08-08T00:00:00Z",
+        )
+
+        self.assertEqual(report["review_status"], "no_observed_mismatch")
+        self.assertEqual(report["distribution"]["top_addresses"][0]["share_of_positive_flow_pct"], 75.0)
+
+
 if __name__ == "__main__":
     unittest.main()
