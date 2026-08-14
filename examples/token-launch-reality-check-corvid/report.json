@@ -1,0 +1,121 @@
+{
+  "captured_at": "2026-08-14T14:11:41Z",
+  "chain": {
+    "chain_id": 8453,
+    "rpc_url": "https://mainnet.base.org"
+  },
+  "claims": {
+    "checks": [
+      {
+        "claimed": 8453,
+        "field": "chain_id",
+        "observed": 8453,
+        "status": "match"
+      },
+      {
+        "claimed": "0xd8c33062a461251cf5669b0490a88f023bf45ba3",
+        "field": "address",
+        "observed": "0xd8c33062a461251cf5669b0490a88f023bf45ba3",
+        "status": "match"
+      },
+      {
+        "claimed": "Corvid",
+        "field": "symbol",
+        "observed": "Corvid",
+        "status": "match"
+      },
+      {
+        "claimed": 18,
+        "field": "decimals",
+        "observed": 18,
+        "status": "match"
+      }
+    ],
+    "overall_status": "match"
+  },
+  "distribution": {
+    "basis": "net_positive_transfer_flow",
+    "complete_history_claimed": false,
+    "from_block": 49963450,
+    "note": "This is a bounded Transfer-event flow screen, not a verified holder snapshot.",
+    "positive_flow_total_raw": 8959796042571467165003162947,
+    "status": "bounded",
+    "to_block": 49963650,
+    "top_addresses": [
+      {
+        "address": "0x498581ff718922c3f8e6a244956af099b2652b2b",
+        "net_positive_flow_raw": 8955567450756802816276499084,
+        "share_of_positive_flow_pct": 99.952805
+      },
+      {
+        "address": "0x9982538f41f2ae29ddb9d3d9307010052984fdbb",
+        "net_positive_flow_raw": 4228591814664348726663863,
+        "share_of_positive_flow_pct": 0.047195
+      }
+    ],
+    "transfer_events": 75,
+    "unique_nonzero_addresses": 9
+  },
+  "limitations": [
+    "A successful read does not prove source-code correctness, admin intent, solvency, or safety.",
+    "Transfer-event concentration is only as complete as the configured block range and does not identify beneficial ownership.",
+    "Permission checks cover common owner()/minter()/paused() surfaces and EIP-1967 slots, not every custom control path.",
+    "Minimal-proxy detection matches only well-known bytecode prefixes (EIP-1167 and Solady LibClone); other delegatecall/clone patterns are not detected.",
+    "Uniswap v4 pool checks use the supplied PoolManager and PoolId; currency identity is read from Initialize events, while live reserves/active liquidity are not checked."
+  ],
+  "liquidity": {
+    "reason": "no liquidity_pool configuration supplied",
+    "status": "not_checked"
+  },
+  "observation": {
+    "block_hash": "0xaf458771ac86ecb66604300ed58a90928e712145e6475b906e66accf1027101a",
+    "block_number": 49963650,
+    "block_tag": "0x2fa6282",
+    "mode": "pinned",
+    "timestamp": 1786716647
+  },
+  "permissions": {
+    "minter": null,
+    "owner": "0x660eaaedebc968f8f3694354fa8ec0b4c5ba8d12",
+    "paused": null,
+    "review_flags": [
+      "owner() returned a non-zero address; owner-controlled functions need review"
+    ]
+  },
+  "review_flags": [
+    "owner() returned a non-zero address; owner-controlled functions need review",
+    "minimal delegatecall proxy observed (solady-minimal-proxy); implementation at 0xdb7b520bb5c3a2c5d4871198081911359f93be87; token logic is mutable"
+  ],
+  "review_status": "manual_review_required",
+  "schema_version": 1,
+  "scope": "public JSON-RPC reads only; not an audit, certification, investment advice, or token recommendation",
+  "sources": [
+    "https://api.geckoterminal.com/api/v2/networks/base/tokens/0xd8c33062a461251cf5669b0490a88f023bf45ba3",
+    "https://api.geckoterminal.com/api/v2/networks/base/tokens/0xd8c33062a461251cf5669b0490a88f023bf45ba3/pools",
+    "https://base.blockscout.com/address/0xd8c33062a461251cf5669b0490a88f023bf45ba3"
+  ],
+  "token": {
+    "address": "0xd8c33062a461251cf5669b0490a88f023bf45ba3",
+    "metadata": {
+      "decimals": 18,
+      "name": "Corvid by Opus 5",
+      "symbol": "Corvid",
+      "total_supply": 100000000000000000000000000000
+    },
+    "runtime_code": {
+      "byte_length": 44,
+      "sha256": "42478fba81b9ab32a3df3ab4a4f8acd67a4528f1d295a0a32924b4eb583fce4d"
+    }
+  },
+  "upgradeability": {
+    "admin": null,
+    "admin_slot": "0xb53127684a568b3173ae13b9f8a6016e243e63b6e2ee1178d6a717850b5d6103",
+    "implementation": null,
+    "implementation_slot": "0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc",
+    "minimal_proxy": {
+      "implementation": "0xdb7b520bb5c3a2c5d4871198081911359f93be87",
+      "pattern": "solady-minimal-proxy"
+    },
+    "status": "minimal_proxy_observed"
+  }
+}
