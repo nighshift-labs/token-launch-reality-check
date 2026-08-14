@@ -1,0 +1,22 @@
+{
+  "rpc_url": "https://mainnet.base.org",
+  "token_address": "0x1a44233fae8d50f1aeb3a5d58dd426ff4814cb53",
+  "claims": {
+    "chain_id": 8453,
+    "address": "0x1a44233fae8d50f1aeb3a5d58dd426ff4814cb53",
+    "symbol": "QUID",
+    "decimals": 18
+  },
+  "holder_scan": {
+    "from_block": 49962538,
+    "to_block": 49962738,
+    "chunk_size": 200,
+    "complete": false
+  },
+  "source_urls": [
+    "https://api.geckoterminal.com/api/v2/networks/base/tokens/0x1a44233fae8d50f1aeb3a5d58dd426ff4814cb53",
+    "https://api.geckoterminal.com/api/v2/networks/base/pools/0x07c4bc0f5fb6cb069124df3e1ae0b8fd8148ccc4",
+    "https://dexscreener.com/base/0x07c4bc0f5fb6cb069124df3e1ae0b8fd8148ccc4",
+    "https://base.blockscout.com/address/0x1a44233fae8d50f1aeb3a5d58dd426ff4814cb53"
+  ]
+}
