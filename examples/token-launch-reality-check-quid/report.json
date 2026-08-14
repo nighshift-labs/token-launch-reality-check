@@ -1,0 +1,152 @@
+{
+  "captured_at": "2026-08-14T13:40:44Z",
+  "chain": {
+    "chain_id": 8453,
+    "rpc_url": "https://mainnet.base.org"
+  },
+  "claims": {
+    "checks": [
+      {
+        "claimed": 8453,
+        "field": "chain_id",
+        "observed": 8453,
+        "status": "match"
+      },
+      {
+        "claimed": "0x1a44233fae8d50f1aeb3a5d58dd426ff4814cb53",
+        "field": "address",
+        "observed": "0x1a44233fae8d50f1aeb3a5d58dd426ff4814cb53",
+        "status": "match"
+      },
+      {
+        "claimed": "QUID",
+        "field": "symbol",
+        "observed": "QUID",
+        "status": "match"
+      },
+      {
+        "claimed": 18,
+        "field": "decimals",
+        "observed": 18,
+        "status": "match"
+      }
+    ],
+    "overall_status": "match"
+  },
+  "distribution": {
+    "basis": "net_positive_transfer_flow",
+    "complete_history_claimed": false,
+    "from_block": 49962538,
+    "note": "This is a bounded Transfer-event flow screen, not a verified holder snapshot.",
+    "positive_flow_total_raw": 45570284588612682337239,
+    "status": "bounded",
+    "to_block": 49962738,
+    "top_addresses": [
+      {
+        "address": "0x8b289ed9bb4fcf49e358a2ebc5ba2cc60a296c96",
+        "net_positive_flow_raw": 15552934947788019001371,
+        "share_of_positive_flow_pct": 34.129554
+      },
+      {
+        "address": "0x97b9d2102a9a65a26e1ee82d59e42d1b73b68689",
+        "net_positive_flow_raw": 6533584481000000000000,
+        "share_of_positive_flow_pct": 14.337379
+      },
+      {
+        "address": "0xefc68ed02744c26fe3bb33e1458393e34dfdf2dd",
+        "net_positive_flow_raw": 4271711736682302531323,
+        "share_of_positive_flow_pct": 9.373897
+      },
+      {
+        "address": "0xbf123060c74aa2bf6f73852885d3ac89397acf26",
+        "net_positive_flow_raw": 4261209144290481104569,
+        "share_of_positive_flow_pct": 9.35085
+      },
+      {
+        "address": "0x60b9319e1d4191931d027d85815149750b30bd3a",
+        "net_positive_flow_raw": 4084068258876996204488,
+        "share_of_positive_flow_pct": 8.96213
+      },
+      {
+        "address": "0x63d8ce8c4a3baa32f703294d6dea910b03d4d7c8",
+        "net_positive_flow_raw": 4072611296386674173029,
+        "share_of_positive_flow_pct": 8.936989
+      },
+      {
+        "address": "0x07c4bc0f5fb6cb069124df3e1ae0b8fd8148ccc4",
+        "net_positive_flow_raw": 3714902406013557789745,
+        "share_of_positive_flow_pct": 8.152028
+      },
+      {
+        "address": "0x278d858f05b94576c1e6f73285886876ff6ef8d2",
+        "net_positive_flow_raw": 2788175121953998365524,
+        "share_of_positive_flow_pct": 6.118406
+      },
+      {
+        "address": "0xbea8108b5a8707edfe1507c3a06e2735d40ef7c2",
+        "net_positive_flow_raw": 254948146363075375876,
+        "share_of_positive_flow_pct": 0.559461
+      },
+      {
+        "address": "0xb49f5d40a94328e1d78e177fa651d4e580428a87",
+        "net_positive_flow_raw": 22270175004823833464,
+        "share_of_positive_flow_pct": 0.04887
+      }
+    ],
+    "transfer_events": 623,
+    "unique_nonzero_addresses": 52
+  },
+  "limitations": [
+    "A successful read does not prove source-code correctness, admin intent, solvency, or safety.",
+    "Transfer-event concentration is only as complete as the configured block range and does not identify beneficial ownership.",
+    "Permission checks cover common owner()/minter()/paused() surfaces and EIP-1967 slots, not every custom control path.",
+    "Uniswap v4 pool checks use the supplied PoolManager and PoolId; currency identity is read from Initialize events, while live reserves/active liquidity are not checked."
+  ],
+  "liquidity": {
+    "reason": "no liquidity_pool configuration supplied",
+    "status": "not_checked"
+  },
+  "observation": {
+    "block_hash": null,
+    "block_number": null,
+    "block_tag": "latest",
+    "mode": "latest",
+    "timestamp": null
+  },
+  "permissions": {
+    "minter": null,
+    "owner": null,
+    "paused": null,
+    "review_flags": []
+  },
+  "review_flags": [],
+  "review_status": "no_observed_mismatch",
+  "schema_version": 1,
+  "scope": "public JSON-RPC reads only; not an audit, certification, investment advice, or token recommendation",
+  "sources": [
+    "https://api.geckoterminal.com/api/v2/networks/base/tokens/0x1a44233fae8d50f1aeb3a5d58dd426ff4814cb53",
+    "https://api.geckoterminal.com/api/v2/networks/base/pools/0x07c4bc0f5fb6cb069124df3e1ae0b8fd8148ccc4",
+    "https://dexscreener.com/base/0x07c4bc0f5fb6cb069124df3e1ae0b8fd8148ccc4",
+    "https://base.blockscout.com/address/0x1a44233fae8d50f1aeb3a5d58dd426ff4814cb53"
+  ],
+  "token": {
+    "address": "0x1a44233fae8d50f1aeb3a5d58dd426ff4814cb53",
+    "metadata": {
+      "decimals": 18,
+      "name": "Squid",
+      "symbol": "QUID",
+      "total_supply": 1000000000000000000000000000
+    },
+    "runtime_code": {
+      "byte_length": 3760,
+      "sha256": "112c2e3838614ee912ea13db679598779c6fc09fe9a934649daaeec5d2dc6206"
+    }
+  },
+  "upgradeability": {
+    "admin": null,
+    "admin_slot": "0xb53127684a568b3173ae13b9f8a6016e243e63b6e2ee1178d6a717850b5d6103",
+    "implementation": null,
+    "implementation_slot": "0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc",
+    "status": "no_eip1967_implementation_observed"
+  }
+}
