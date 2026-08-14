@@ -1,0 +1,22 @@
+{
+  "rpc_url": "https://mainnet.base.org",
+  "token_address": "0xd8c33062a461251cf5669b0490a88f023bf45ba3",
+  "observation_block": 49963650,
+  "claims": {
+    "chain_id": 8453,
+    "address": "0xd8c33062a461251cf5669b0490a88f023bf45ba3",
+    "symbol": "Corvid",
+    "decimals": 18
+  },
+  "holder_scan": {
+    "from_block": 49963450,
+    "to_block": 49963650,
+    "chunk_size": 200,
+    "complete": false
+  },
+  "source_urls": [
+    "https://api.geckoterminal.com/api/v2/networks/base/tokens/0xd8c33062a461251cf5669b0490a88f023bf45ba3",
+    "https://api.geckoterminal.com/api/v2/networks/base/tokens/0xd8c33062a461251cf5669b0490a88f023bf45ba3/pools",
+    "https://base.blockscout.com/address/0xd8c33062a461251cf5669b0490a88f023bf45ba3"
+  ]
+}
