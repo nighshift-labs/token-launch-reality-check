@@ -29,6 +29,12 @@ ZERO_ADDRESS = "0x" + "00" * 20
 IMPLEMENTATION_SLOT = "0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc"
 ADMIN_SLOT = "0xb53127684a568b3173ae13b9f8a6016e243e63b6e2ee1178d6a717850b5d6103"
 TRANSFER_TOPIC = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
+# Bounded-flow concentration flag: when a single address holds this share of the
+# bounded window's net positive Transfer flow (and there are enough events to be
+# meaningful), it is a launch-reality signal worth surfacing. Reported as a flag,
+# not a fraud determination, and bounded to the configured block range only.
+FLOW_CONCENTRATION_THRESHOLD_PCT = 90.0
+FLOW_CONCENTRATION_MIN_EVENTS = 5
 # keccak256("Initialize(bytes32,address,address,uint24,int24,address,uint160,int24)")
 V4_INITIALIZE_TOPIC = "0xdd466e674ea557f56295e2d0218a125ea4b4f0f6f3307b95f85e6110838d6438"
 # Minimal delegatecall-proxy runtime-code prefixes. These clones store the
@@ -730,6 +736,21 @@ def build_report(config: dict[str, object], opener=urlopen, captured_at: str | N
         )
     if claims["overall_status"] == "mismatch":
         review_flags.append("one or more supplied disclosure claims do not match observed chain data")
+    top_flow = distribution.get("top_addresses") or []
+    if (
+        isinstance(distribution.get("transfer_events"), int)
+        and distribution["transfer_events"] >= FLOW_CONCENTRATION_MIN_EVENTS
+        and top_flow
+        and isinstance(top_flow[0].get("share_of_positive_flow_pct"), (int, float))
+        and top_flow[0]["share_of_positive_flow_pct"] >= FLOW_CONCENTRATION_THRESHOLD_PCT
+    ):
+        review_flags.append(
+            "bounded Transfer flow is "
+            + f"{top_flow[0]['share_of_positive_flow_pct']:.2f}%".rstrip("0").rstrip(".")
+            + "% concentrated in a single address ("
+            + top_flow[0]["address"]
+            + ")"
+        )
     if liquidity.get("status") == "mismatch":
         if liquidity.get("pool_type_hint") == "uniswap-v4":
             review_flags.append("supplied Uniswap v4 pool ID/currency claims do not match the Initialize event")
