@@ -32,10 +32,26 @@ window, and source URLs. See `examples/token-launch-reality-check-corvid/` and
 `examples/token-launch-reality-check-quid/` for two live runs (one flagged, one
 clean).
 
+## Fresh-launch digest sweep
+
+`scripts/base_launch_reality_digest.py` wraps the checker in a sweep over the
+freshest Base pools (GeckoTerminal `new_pools`): dedupes base tokens, enriches
+metadata, pins every state read to a single captured block, throttles public-RPC
+calls, and writes a consolidated digest plus per-token reports.
+
+```sh
+python3 scripts/base_launch_reality_digest.py --max-tokens 8 --pages 2
+```
+
+`examples/base-launch-reality-digest-2026-08-20/` is a pinned one-token run:
+`observation_block` is fixed in the manifest, so the stored report is
+reproducible later instead of silently re-reading moving `latest` state.
+
 ## Tests
 
 ```sh
 cd tools && python3 -m unittest test_token_reality_check -v
+cd ../scripts && python3 -m unittest test_base_launch_reality_digest -v
 ```
 
 ## Limitations

@@ -1,0 +1,116 @@
+{
+  "captured_at": "2026-08-20T09:35:41Z",
+  "chain": {
+    "chain_id": 8453,
+    "rpc_url": "https://mainnet.base.org"
+  },
+  "claims": {
+    "checks": [
+      {
+        "claimed": 8453,
+        "field": "chain_id",
+        "observed": 8453,
+        "status": "match"
+      },
+      {
+        "claimed": "0xaecc50d46c9295046122f95bfcc0e1d335c76885",
+        "field": "address",
+        "observed": "0xaecc50d46c9295046122f95bfcc0e1d335c76885",
+        "status": "match"
+      },
+      {
+        "claimed": "crx",
+        "field": "symbol",
+        "observed": "crx",
+        "status": "match"
+      },
+      {
+        "claimed": 18,
+        "field": "decimals",
+        "observed": 18,
+        "status": "match"
+      }
+    ],
+    "overall_status": "match"
+  },
+  "distribution": {
+    "basis": "net_positive_transfer_flow",
+    "complete_history_claimed": false,
+    "from_block": 50214385,
+    "note": "This is a bounded Transfer-event flow screen, not a verified holder snapshot.",
+    "positive_flow_total_raw": 702893369026971250,
+    "status": "bounded",
+    "to_block": 50214585,
+    "top_addresses": [
+      {
+        "address": "0x5972110b6bd5bf0e89a024b8fb10b56db43b498c",
+        "net_positive_flow_raw": 702893369026971250,
+        "share_of_positive_flow_pct": 100.0
+      }
+    ],
+    "transfer_events": 11,
+    "unique_nonzero_addresses": 6
+  },
+  "limitations": [
+    "A successful read does not prove source-code correctness, admin intent, solvency, or safety.",
+    "Transfer-event concentration is only as complete as the configured block range and does not identify beneficial ownership.",
+    "Permission checks cover common owner()/minter()/paused() surfaces and EIP-1967 slots, not every custom control path.",
+    "Minimal-proxy detection matches only well-known bytecode prefixes (EIP-1167 and Solady LibClone); other delegatecall/clone patterns are not detected.",
+    "Uniswap v4 pool checks use the supplied PoolManager and PoolId; currency identity is read from Initialize events, while live reserves/active liquidity are not checked."
+  ],
+  "liquidity": {
+    "reason": "no liquidity_pool configuration supplied",
+    "status": "not_checked"
+  },
+  "observation": {
+    "block_hash": "0x4b92c17f49f1b25bdd508f06e5960a39f1b45fa640c98b50ee57d6bbee1066ea",
+    "block_number": 50214585,
+    "block_tag": "0x2fe36b9",
+    "mode": "pinned",
+    "timestamp": 1787218517
+  },
+  "permissions": {
+    "minter": null,
+    "owner": "0x8ba0cb929d5119e0a66015198f72712a14b3f67a",
+    "paused": null,
+    "review_flags": [
+      "owner() returned a non-zero address; owner-controlled functions need review"
+    ]
+  },
+  "review_flags": [
+    "owner() returned a non-zero address; owner-controlled functions need review",
+    "minimal delegatecall proxy observed (solady-minimal-proxy); implementation at 0x2bb625daa0a9dd2c69939cbd6c2dbae2ac6667ac; token logic is mutable",
+    "bounded Transfer flow is 100% concentrated in a single address (0x5972110b6bd5bf0e89a024b8fb10b56db43b498c)"
+  ],
+  "review_status": "manual_review_required",
+  "schema_version": 1,
+  "scope": "public JSON-RPC reads only; not an audit, certification, investment advice, or token recommendation",
+  "sources": [
+    "https://api.geckoterminal.com/api/v2/networks/base/tokens/0xaecc50d46c9295046122f95bfcc0e1d335c76885",
+    "https://api.geckoterminal.com/api/v2/networks/base/tokens/0xaecc50d46c9295046122f95bfcc0e1d335c76885/pools"
+  ],
+  "token": {
+    "address": "0xaecc50d46c9295046122f95bfcc0e1d335c76885",
+    "metadata": {
+      "decimals": 18,
+      "name": "crx",
+      "symbol": "crx",
+      "total_supply": 1000000000000000000000000000
+    },
+    "runtime_code": {
+      "byte_length": 44,
+      "sha256": "b69554cbd5632dfd39af67eeaa01eb317397ca23b43b5372c978b9492ffbb9d9"
+    }
+  },
+  "upgradeability": {
+    "admin": null,
+    "admin_slot": "0xb53127684a568b3173ae13b9f8a6016e243e63b6e2ee1178d6a717850b5d6103",
+    "implementation": null,
+    "implementation_slot": "0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc",
+    "minimal_proxy": {
+      "implementation": "0x2bb625daa0a9dd2c69939cbd6c2dbae2ac6667ac",
+      "pattern": "solady-minimal-proxy"
+    },
+    "status": "minimal_proxy_observed"
+  }
+}

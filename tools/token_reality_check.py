@@ -746,7 +746,7 @@ def build_report(config: dict[str, object], opener=urlopen, captured_at: str | N
     ):
         review_flags.append(
             "bounded Transfer flow is "
-            + f"{top_flow[0]['share_of_positive_flow_pct']:.2f}%".rstrip("0").rstrip(".")
+            + f"{top_flow[0]['share_of_positive_flow_pct']:.2f}".rstrip("0").rstrip(".")
             + "% concentrated in a single address ("
             + top_flow[0]["address"]
             + ")"

@@ -530,6 +530,7 @@ class TokenRealityCheckTests(unittest.TestCase):
 
         self.assertEqual(report["review_status"], "manual_review_required")
         self.assertTrue(any("concentrated in a single address" in flag for flag in report["review_flags"]))
+        self.assertTrue(all("%%" not in flag for flag in report["review_flags"]))
 
     def test_does_not_flag_low_bounded_flow_concentration(self):
         def opener(request, timeout):
